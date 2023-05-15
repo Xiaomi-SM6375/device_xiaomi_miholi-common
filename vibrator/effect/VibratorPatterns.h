@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2021, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -27,24 +27,48 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#define LOG_TAG "vendor.qti.hardware.vibrator.service.xiaomi_holi"
+#ifndef  VIBRATOR_PATTERNS_H
+#define  VIBRATOR_PATTERNS_H
 
-#include <android-base/logging.h>
-#include <android/binder_manager.h>
-#include <android/binder_process.h>
+#include <sys/types.h>
 
-#include "Vibrator.h"
+struct effect {
+    uint16_t effect_id;
+    uint16_t effect_type;
+    uint16_t effect_len;
+    uint16_t offset;
+    uint32_t play_rate;
+};
 
-using aidl::android::hardware::vibrator::Vibrator;
+enum period {
+    S_PERIOD_T_LRA = 0,
+    S_PERIOD_T_LRA_DIV_2,
+    S_PERIOD_T_LRA_DIV_4,
+    S_PERIOD_T_LRA_DIV_8,
+    S_PERIOD_T_LRA_X_2,
+    S_PERIOD_T_LRA_X_4,
+    S_PERIOD_T_LRA_X_8,
+    /* F_8KHZ to F_48KHZ can be specified only for FIFO patterns */
+    S_PERIOD_F_8KHZ = 8,
+    S_PERIOD_F_16KHZ,
+    S_PERIOD_F_24KHZ,
+    S_PERIOD_F_32KHZ,
+    S_PERIOD_F_44P1KHZ,
+    S_PERIOD_F_48KHZ,
+};
 
-int main() {
-    ABinderProcess_setThreadPoolMaxThreadCount(0);
-    std::shared_ptr<Vibrator> vib = ndk::SharedRefBase::make<Vibrator>();
+enum effect_type {
+    EFFECT_TYPE_PATTERN = 1,
+    EFFECT_TYPE_FIFO_ENVELOPE,
+    EFFECT_TYPE_FIFO_STREAMING,
+};
 
-    const std::string instance = std::string() + Vibrator::descriptor + "/default";
-    binder_status_t status = AServiceManager_addService(vib->asBinder().get(), instance.c_str());
-    CHECK(status == STATUS_OK);
+enum offload_status {
+    OFFLOAD_SUCCESS = 0,
+    OFFLOAD_FAILURE = 1
+};
 
-    ABinderProcess_joinThreadPool();
-    return EXIT_FAILURE;  // should not reach
-}
+int get_pattern_config(uint8_t **ptr, uint32_t *size);
+int get_pattern_data(uint8_t **ptr, uint32_t *size);
+void free_pattern_mem(uint8_t *ptr);
+#endif
