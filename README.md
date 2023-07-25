@@ -1,4 +1,4 @@
-# Common device tree for Xiaomi SM6375 devices
+# Common device tree for Xiaomi SM6375/SM4375 devices (miholi)
 
 ```
 #

@@ -1,6 +1,6 @@
 [
   {
-    "repository": "android_kernel_xiaomi_sm6375",
-    "target_path": "kernel/xiaomi/sm6375"
+    "repository": "android_kernel_xiaomi_miholi",
+    "target_path": "kernel/xiaomi/miholi"
   }
 ]

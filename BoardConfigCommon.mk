@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-COMMON_PATH := device/xiaomi/sm6375-common
+COMMON_PATH := device/xiaomi/miholi-common
 
 # A/B
 AB_OTA_UPDATER := true
@@ -80,7 +80,7 @@ BOARD_BOOT_HEADER_VERSION := 3
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc LLVM=1
-TARGET_KERNEL_SOURCE := kernel/xiaomi/sm6375
+TARGET_KERNEL_SOURCE := kernel/xiaomi/miholi
 
 BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom
 BOARD_KERNEL_CMDLINE += androidboot.memcg=1
