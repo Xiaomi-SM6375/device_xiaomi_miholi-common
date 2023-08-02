@@ -1490,3 +1490,9 @@ service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service
     writepid /dev/cpuset/foreground/tasks /dev/stune/foreground/tasks
     socket audio_hw_socket seqpacket 0666 system system
     onrestart restart audioserver
+
+on property:dev.bootcomplete=1
+    chmod 0666 /dev/xiaomi-touch
+
+on property:dev.bootcomplete=1 && property:persist.sys.holi.dt2w=*
+    exec /system/bin/xiaomi-touch 14 ${persist.sys.holi.dt2w}
