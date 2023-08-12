@@ -474,7 +474,7 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.vibrator.impl
 
 PRODUCT_COPY_FILES += \
-    hardware/qcom/vibrator-caf/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
+    vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
 
 # WiFi
 PRODUCT_PACKAGES += \
